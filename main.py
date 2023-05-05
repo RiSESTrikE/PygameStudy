@@ -14,7 +14,7 @@ screen = pygame.display.set_mode((SCREEN_HEIGHT, SCREEN_HEIGHT))
 pygame.display.set_caption("PygameStudy")
 
 # Character var
-CHARACTER_IMG: pygame.Surface = pygame.image.load("img\character.png")
+CHARACTER_IMG: pygame.Surface = pygame.image.load("./img/character.png")
 CHARACTER_RECT: pygame.rect = CHARACTER_IMG.get_rect()
 
 CHARACTER_WIGHT: int = CHARACTER_RECT.size[0]
@@ -26,15 +26,22 @@ is_runing = True
 while is_runing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            is_running = False
+            is_runing = False
+            
         if event.type == pygame.KEYDOWN:
             match event.key:
-                case pygame.K_t:
-                    print("test")
+                case pygame.K_UP: # up 키를 눌렀을때
+                    CHARACTER_POS.y -= 10 # 캐릭터의 y 좌표를 10만큼 빼준다
+                case pygame.K_DOWN: # down 키를 눌렀을때
+                    CHARACTER_POS.y += 10 # 캐릭터의 y 좌표를 10만큼 더해준다
+                case pygame.K_LEFT: # left 키를 눌렀을때
+                    CHARACTER_POS.x -= 10 # 캐릭터의 x 좌표를 10만큼 빼준다
+                case pygame.K_RIGHT: # right 키를 눌렀을때
+                    CHARACTER_POS.x += 10 # 캐릭터의 x 좌표를 10만큼 더해준다
+                
 
     screen.blit(BACKGROUND, (0, 0))
     screen.blit(CHARACTER_IMG, CHARACTER_POS) 
 
     pygame.display.update()
-    
 pygame.quit()
